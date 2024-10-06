@@ -76,8 +76,49 @@ void searchLL(int target,Node* head){
     cout<<"Not Found"<<endl;
 
 }
+//Delete
 
+Node* removehead(Node* head){
+    if(head==NULL) return head;
+    Node* temp =head;
+    head=head->next;
+    delete temp;
+    return head;
+}
 
+Node* removetail(Node* head){
+    if(head==NULL || head->next ==nullptr) return NULL;
+             Node* temp=head;
+     while(temp->next->next != nullptr) {
+        temp=temp->next;
+     }
+     free(temp->next);
+     temp->next=nullptr;
+
+     return head;
+}
+
+Node* removeinLL(Node* head,int tar){
+    if(head==NULL) return head;
+    
+    if(head->data == tar){
+       Node* temp =head;
+       head=head->next;
+       free(temp);
+       return head;
+    }
+
+    Node* temp =head;
+    while(temp->next != nullptr){
+        if(temp->next->data ==tar){
+            temp->next=temp->next->next;
+            break;
+        }
+        temp=temp->next;
+    }
+    return head;
+
+}
 
 
 int main(){
@@ -88,5 +129,14 @@ printLL(head);
 cout<<LengthLL(head)<<endl;
 
 searchLL(11,head);
+
+//head=removehead(head);
+//printLL(head);
+
+head=removetail(head);
+printLL(head);
+
+head=removeinLL(head,8);
+printLL(head);
 
 }
