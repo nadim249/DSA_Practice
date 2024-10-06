@@ -120,7 +120,60 @@ Node* removeinLL(Node* head,int tar){
 
 }
 
+//Insert head
 
+Node* insertHead(Node* head,int val){
+    Node* temp=new Node(val,head);
+    return temp;
+}
+
+//insert tail
+
+Node* insertLast(Node* head,int val){
+    if(head==nullptr){
+        return new Node(val);
+    }
+    Node* temp=head;
+
+    while(temp->next != nullptr){
+        temp=temp->next;
+    }
+
+    Node* newNode=new Node(val);
+    temp->next=newNode;
+
+    return head;
+}
+
+
+Node* insertkth(Node* head,int k,int val){
+    if(head ==nullptr){
+        return new Node(val);
+    }
+
+   if(k==1){
+    Node* temp=new Node(val,head);
+    return temp;
+    }
+
+    int cnt=0;
+    Node* temp=head;
+
+    while(temp != nullptr){
+        cnt++;
+        if(cnt ==k-1){
+            Node* newNode=new Node(val);
+            newNode->next=temp->next;
+            temp->next=newNode;
+            break;
+        }
+
+        temp=temp->next;
+    }
+
+    return head;
+
+}
 int main(){
 
 vector<int> arr={2,5,8,10,7};
@@ -136,7 +189,16 @@ searchLL(11,head);
 head=removetail(head);
 printLL(head);
 
-head=removeinLL(head,8);
+//head=removeinLL(head,8);
+//printLL(head);
+
+head=insertHead(head,34);
+printLL(head);
+
+head=insertLast(head,45);
+printLL(head);
+
+head=insertkth(head,3,57);
 printLL(head);
 
 }
