@@ -34,7 +34,7 @@ Node* covertArrToDl(vector<int> arr){
 
     return head;
 }
-//Print doubly LL
+//Print doubly LinkedList
 void printDLL(Node* head){
      Node* temp=head;
 
