@@ -82,6 +82,42 @@ Node* deleteTail(Node* head){
     return head;
 
 }
+Node* removekth(Node* head,int k){
+    if(head==nullptr){
+        return nullptr;
+    }
+
+    int cnt=0;
+    Node* knode=head;
+
+    while(knode !=nullptr){
+        cnt++;
+        if(cnt ==k) break;
+        knode=knode->next;
+    }
+
+    Node* prev=knode->back;
+    Node* front=knode->next;
+
+    if(prev==nullptr && front ==nullptr){
+        return nullptr;
+
+    }else if(prev==nullptr){
+        return deleteHead(head);
+
+    }else if(front==nullptr){
+        return deleteHead(head);
+    }
+
+    prev->next=front;
+    front->back=prev;
+    
+    knode->next=nullptr;
+    knode->back=nullptr;
+    delete knode;
+
+    return head;
+}
 
 int main(){
 
@@ -94,5 +130,9 @@ printDLL(head);
 
 head=deleteTail(head);
 printDLL(head);
+
+head=removekth(head,2);
+printDLL(head);
+
 
 }
