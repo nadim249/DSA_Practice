@@ -118,6 +118,75 @@ Node* removekth(Node* head,int k){
 
     return head;
 }
+//delete node
+void deletenode(Node* temp){
+    Node* prev=temp->back;
+    Node* front=temp->next;
+
+    if(front == nullptr){
+        prev->next = nullptr;
+        temp->back=nullptr;
+        free(temp);
+        return;
+    }
+
+    prev->next=front;
+    prev->back=prev;
+
+    temp->next=temp->back=nullptr;
+    free(temp);
+
+}
+
+//insert  node in dll
+
+Node* insertBeforeHead(Node* head,int val){
+    Node* newHead=new Node(val,head,nullptr);
+    head->back=newHead;
+    return newHead;
+}
+
+Node* insertBeforeTail(Node* head,int val){
+    if(head==nullptr){
+        return insertBeforeHead(head,val);
+    }
+
+    Node* tail=head;
+    while(tail->next !=nullptr){
+        tail=tail->next;
+    }
+
+    Node* prev=tail->back;
+    Node* newnode=new Node(val,tail,prev);
+    tail->back=newnode;
+    prev->next=newnode;
+    return head;
+}
+Node* insertBeforekthnode(Node* head,int k,int val){
+    if(k==1){
+        return insertBeforeHead(head,val);
+    }
+    Node* temp=head;
+    int cnt=0;
+    while(temp !=nullptr){
+        cnt++;
+        if(cnt ==k) break;
+        temp=temp->next;
+    }
+
+    Node* prev=temp->back;
+    Node* newnode=new Node(val,temp,prev);
+    prev->next=newnode;
+    temp->back=newnode;
+    return head;
+}
+void insertBeforenode(Node* node,int val){
+    Node* prev=node->back;
+    Node* newnode=new Node(val,node,prev);
+    prev->next=newnode;
+    node->back=newnode;
+
+}
 
 int main(){
 
@@ -132,6 +201,13 @@ head=deleteTail(head);
 printDLL(head);
 
 head=removekth(head,2);
+printDLL(head);
+
+head=insertBeforekthnode(head,2,57);
+printDLL(head);
+
+
+insertBeforenode(head->next,287);
 printDLL(head);
 
 
